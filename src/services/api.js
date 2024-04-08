@@ -13,11 +13,4 @@ export const fetchTopMovies = async () => {
   const res = await axios.get(url, options);
   return res.data;
 };
-
-fetchTopMovies()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
-  });
+ 

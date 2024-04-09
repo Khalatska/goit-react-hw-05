@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams, Routes, Route, NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  useParams,
+  Routes,
+  Route,
+  NavLink,
+  useLocation,
+  Link,
+} from "react-router-dom";
 import MovieCast from "../../components/MovieCast/MovieCast";
 import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import { findMoviesById } from "../../services/api";
@@ -8,6 +15,8 @@ import css from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkRes = useRef(location.state ?? "/");
   const [movie, setMovie] = useState(null);
   const activeLink = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
@@ -28,6 +37,7 @@ const MovieDetailsPage = () => {
     <div>
       {movie !== null && (
         <>
+          <Link to={backLinkRes.current}> Go back</Link>
           <img
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt={movie.original_title}
@@ -54,7 +64,7 @@ const MovieDetailsPage = () => {
           <Routes>
             <Route
               path="cast"
-              element={<MovieCast movieId={movie.id} />}
+              element={<MovieCast/>}
             ></Route>
             <Route path="review" element={<MovieReviews />}></Route>
           </Routes>

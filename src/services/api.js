@@ -24,3 +24,9 @@ export const fetchMoviesCast = async (movieId) => {
   const res = await axios.get(url, options);
   return res.data;
 };
+
+export const fetchMovieByQuery = async (query) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+  const res = await axios.get(url, options);
+  return res.data;
+};

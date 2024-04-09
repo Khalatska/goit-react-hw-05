@@ -1,12 +1,15 @@
 import { fetchTopMovies } from "../../services/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MovieList from "../../components/MovieList/MovieList";
 
 const HomePage = () => {
+  const [moviesList, setMoviesList] = useState(null);
+
   useEffect(() => {
     async function topMovies() {
       try {
         const data = await fetchTopMovies();
-        console.log(data);
+        setMoviesList(data.results);
       } catch (error) {
         console.log(error);
       }
@@ -14,7 +17,12 @@ const HomePage = () => {
     topMovies();
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <p> Trending today</p>
+      {moviesList !== null && <MovieList moviesList={moviesList} />}
+    </div>
+  );
 };
 
 export default HomePage;

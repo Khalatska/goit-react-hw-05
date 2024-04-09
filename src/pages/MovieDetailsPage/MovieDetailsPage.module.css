@@ -1,0 +1,9 @@
+a {
+  text-decoration: none;
+}
+.link {
+  color: black;
+}
+.active {
+  color: brown;
+}

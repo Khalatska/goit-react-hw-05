@@ -30,3 +30,9 @@ export const fetchMovieByQuery = async (query) => {
   const res = await axios.get(url, options);
   return res.data;
 };
+
+export const fetchMoviesReviews = async (movieId) => {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`;
+  const res = await axios.get(url, options);
+  return res.data;
+};

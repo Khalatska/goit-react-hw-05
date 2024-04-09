@@ -8,7 +8,7 @@ const Navigation = () => {
   };
   return (
     <div>
-      <nav>
+      <nav className={css.nav}>
         <NavLink to="/" className={activeLink}>
           Home
         </NavLink>

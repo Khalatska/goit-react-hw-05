@@ -1,6 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import clsx from "clsx";
+import css from "./MovieList.module.css";
 
 const MovieList = ({ moviesList }) => {
+  const activeLink = ({ isActive }) => {
+    return clsx(css.link, isActive && css.active);
+  };
   const location = useLocation();
   return (
     <div>
@@ -9,9 +14,13 @@ const MovieList = ({ moviesList }) => {
           moviesList.map((movie) => {
             return (
               <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`} state={location}>
+                <NavLink
+                  to={`/movies/${movie.id}`}
+                  state={location}
+                  className={activeLink}
+                >
                   {movie.original_title}
-                </Link>
+                </NavLink>
               </li>
             );
           })}

@@ -1,6 +1,7 @@
 import { fetchTopMovies } from "../../services/api";
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
+import css from "./HomePage.module.css";
 
 const HomePage = () => {
   const [moviesList, setMoviesList] = useState(null);
@@ -19,7 +20,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <p> Trending today</p>
+      <p className={css.title}> Trending today</p>
       {moviesList !== null && <MovieList moviesList={moviesList} />}
     </div>
   );

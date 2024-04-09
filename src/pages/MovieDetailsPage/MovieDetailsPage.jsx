@@ -26,7 +26,6 @@ const MovieDetailsPage = () => {
       try {
         const data = await findMoviesById(movieId);
         setMovie(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -36,39 +35,62 @@ const MovieDetailsPage = () => {
   return (
     <div>
       {movie !== null && (
-        <>
-          <Link to={backLinkRes.current}> Go back</Link>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={movie.original_title}
-          />
-          <h1>{movie.original_title}</h1>
-          <p>User score {Math.round(movie.vote_average * 10)}%</p>
-          <p>
-            <b>Overview </b>
-            {movie.overview}
-          </p>
-          <ul>
-            <b>Genres</b>
-            {Array.isArray(movie.genres) &&
-              movie.genres.map((genre) => {
-                return <li key={genre.id}>{genre.name}</li>;
-              })}
-          </ul>
-          <NavLink className={activeLink} to="cast">
-            Cast
-          </NavLink>
-          <NavLink className={activeLink} to="review">
-            Review
-          </NavLink>
-          <Routes>
-            <Route
-              path="cast"
-              element={<MovieCast/>}
-            ></Route>
-            <Route path="review" element={<MovieReviews />}></Route>
-          </Routes>
-        </>
+        <div className={css.container}>
+          <>
+            {" "}
+            <Link to={backLinkRes.current} className={css.linkGoBack}>
+              {" "}
+              Go back
+            </Link>
+          </>
+          <div className={css.imgDet}>
+            <>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.original_title}
+                className={css.imgMovie}
+              />
+            </>
+
+            <div className={css.det}>
+              <h1>{movie.original_title}</h1>
+              <p>User score {Math.round(movie.vote_average * 10)}%</p>
+              <p>
+                <b>Overview </b>
+                {movie.overview}
+              </p>
+              <ul>
+                <b>Genres</b>
+                {Array.isArray(movie.genres) &&
+                  movie.genres.map((genre) => {
+                    return <li key={genre.id}>{genre.name}</li>;
+                  })}
+              </ul>
+            </div>
+          </div>
+          <div className={css.listAddContainer}>
+            <ul className={css.listAdd}>
+              <b>Additional information</b>
+            </ul>
+            <li>
+              {" "}
+              <NavLink className={activeLink} to="cast">
+                Cast
+              </NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink className={activeLink} to="review">
+                Review
+              </NavLink>
+            </li>
+
+            <Routes>
+              <Route path="cast" element={<MovieCast />}></Route>
+              <Route path="review" element={<MovieReviews />}></Route>
+            </Routes>
+          </div>
+        </div>
       )}
     </div>
   );
